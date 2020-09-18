@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+                 <p>deleting task "{{item}}"?</p>
+                 <form action="{% url 'users:delete' item.id  %}" method="POST">
+                     <a href="{% url 'users:table' %}">back you table   : </a>
+
+                     {% csrf_token %}
+                      <a href="{% url 'users:table' %}">Exit</a>
+
+                        <input type="submit" name="Confirm">
+                        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

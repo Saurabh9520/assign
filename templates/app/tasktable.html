@@ -1,0 +1,110 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+         <h5>Task</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Task_name</th>
+                    <th>Task</th>
+                    <th>start_time</th>
+                    <th>end_time</th>
+                    <th>Time</th>
+
+
+
+                    <th>Start</th>
+                    <th>end</th>
+                </tr>
+                {% for  i  in  s %}
+                <tr>
+                    <td>{{ i.Task_name}}</td>
+                    <td>{{ i.Task_choose}}</td>
+                    <td>{{ i.start_time}}</td>
+                    <td>{{ i.end_time}}</td>
+                    <td><p><span id="seconds">00</span>:<span id="tens">00</span></p></td>
+                    <td><button id="button-start">Start</button></td>
+                    <td> <button id="button-stop">Stop</button></td>
+                    <td><a class="btn btn-sm btn-danger">Submit</a></td>
+
+                {% endfor %}
+
+                </tr>
+
+            </table>
+             <td><a class="btn btn-sm btn-danger" href="{% url 'users:delete' i.id %}">Delete</a></td>
+        </div>
+    </div>
+
+</div>
+<script>
+ window.onload = function () {
+
+  var seconds = 00;
+  var tens = 00;
+  var appendTens = document.getElementById("tens")
+  var appendSeconds = document.getElementById("seconds")
+  var buttonStart = document.getElementById('button-start');
+  var buttonStop = document.getElementById('button-stop');
+  var Interval ;
+
+  buttonStart.onclick = function() {
+
+     clearInterval(Interval);
+     Interval = setInterval(startTimer, 10);
+  }
+
+    buttonStop.onclick = function() {
+       clearInterval(Interval);
+  }
+
+
+  buttonReset.onclick = function() {
+     clearInterval(Interval);
+    tens = "00";
+  	seconds = "00";
+    appendTens.innerHTML = tens;
+  	appendSeconds.innerHTML = seconds;
+  }
+
+
+
+  function startTimer () {
+    tens++;
+
+    if(tens < 10){
+      appendTens.innerHTML = "0" + tens;
+    }
+
+    if (tens > 9){
+      appendTens.innerHTML = tens;
+
+    }
+
+    if (tens > 99) {
+      console.log("seconds");
+      seconds++;
+      appendSeconds.innerHTML = "0" + seconds;
+      tens = 0;
+      appendTens.innerHTML = "0" + 0;
+    }
+
+    if (seconds > 9){
+      appendSeconds.innerHTML = seconds;
+    }
+
+  }
+
+
+}
+</script>
+
+
+{% endblock content %}
+
+
+stop = document.getElementById ("stop"); stop.addEventListener( 'click', stopTime ); }); // stopwatch.js end
